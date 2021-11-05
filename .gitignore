@@ -1,4 +1,6 @@
 node_modules
-ethereum/deploy.js
+ethereum/deploy_user.js
+ethereum/deploy_approvers.js
+ethereum/deploy_campaigns.js
 ethereum/web3.js
 .next
