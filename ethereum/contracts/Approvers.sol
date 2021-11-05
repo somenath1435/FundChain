@@ -80,16 +80,16 @@ contract Approver
     
     mapping(uint => uint) position;
     
-    function insert_campaign_request(uint requestid) public
+    function insert_campaign_request(uint campaignid) public
     {
-        campaign_request.push(requestid);
-        position[requestid]=status.length;
+        campaign_request.push(campaignid);
+        position[campaignid]=status.length;
         status.push(false);
     }
     
-    function update_status(uint requestid) public
+    function update_status(uint campaignid) public
     {
-        status[position[requestid]]=true;
+        status[position[campaignid]]=true;
     }
     
     
