@@ -28,7 +28,6 @@ contract Campaigns
     function createcampaign
     (
         string description1,
-        string typeofcampaign1,
         string targetcity1,
         uint minimumcontribution1,
         address managerid1
@@ -41,7 +40,7 @@ contract Campaigns
         Campaign memory newcampaign = Campaign ({
            campaignid: campaigncount,
            description: description1,
-           typeofcampaign: typeofcampaign1,
+           typeofcampaign: "Undecided",
            targetcity: targetcity1,
            minimumcontribution: minimumcontribution1,
            managerid: managerid1,
@@ -66,14 +65,15 @@ contract Campaigns
         uint campaignid, 
         string new_status,
         uint _priority,
-        address approver
+        address approver,
+        string type_campaign
     ) 
     public
     {
         status_of_campaigns[campaignid]=new_status;
         campaigns[campaignid].priority = _priority;
          campaigns[campaignid].approvedby = approver;
-        
+        campaigns[campaignid].typeofcampaign = type_campaign;
     }
     
     struct Request
@@ -104,7 +104,7 @@ contract Campaigns
     
     function create_spend_Request
     (
-        string description, 
+        string _description, 
         uint value,
         address recipient,
         uint campaignid1
@@ -114,7 +114,7 @@ contract Campaigns
         Request memory newRequest = Request
         ({
            requestid: requestcount,
-           description: description,
+           description: _description,
            value: value,
            recipient: recipient,
            status: false,
