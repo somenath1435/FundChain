@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Card, Button } from 'semantic-ui-react';
-import factory from '../ethereum/factory';
+// import factory from '../ethereum/factory';
 import Layout from '../components/Layout';
 import { Link } from '../routes';
 
 class CampaignIndex extends Component {
-  static async getInitialProps() {
-    const campaigns = await factory.methods.getDeployedCampaigns().call();
+  // static async getInitialProps() {
+  //   // const campaigns = await factory.methods.getDeployedCampaigns().call();
 
-    return { campaigns };
-  }
+  //   // return { campaigns };
+  // }
 
   renderCampaigns() {
     const items = this.props.campaigns.map(address => {
@@ -33,7 +33,7 @@ class CampaignIndex extends Component {
         <div>
           <h3>Open Campaigns</h3>
 
-          <Link route="/campaigns/new">
+          {/* <Link route="/campaigns/new">
             <a>
               <Button
                 floated="right"
@@ -42,9 +42,9 @@ class CampaignIndex extends Component {
                 primary
               />
             </a>
-          </Link>
+          </Link> */}
 
-          {this.renderCampaigns()}
+          {/* {this.renderCampaigns()} */}
         </div>
       </Layout>
     );

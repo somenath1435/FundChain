@@ -73,6 +73,14 @@ contract Approver
         email=email1;
         
     }
+
+    function showdetails() public view returns
+    (
+        string ,string ,uint ,string ,address ,string
+    )
+    {
+        return(firstname,lastname,phonenum,organisation,id,email);
+    }
     
     uint [] public campaign_request;
     //status [i] = false; this request is still pending;

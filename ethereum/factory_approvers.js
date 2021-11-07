@@ -3,7 +3,7 @@ import CampaignFactory from './build_approver/ApproverManager.json';
 
 const instance = new web3.eth.Contract(
   JSON.parse(CampaignFactory.interface),
-  '0x621865b17Bf5c0C69bb25Fa1476237744Cd135bF'
+  '0xC1686632947da70f8111b14B75B45329dF65dd7E'
 );
 
 export default instance;

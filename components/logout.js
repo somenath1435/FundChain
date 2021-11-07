@@ -10,12 +10,8 @@ export default () => {
       </Link>
 
       <Menu.Menu position="right">
-        <Link route="/register">
-          <a className="item">Register</a>
-        </Link>
-
-        <Link route="/login">
-          <a className="item">Login</a>
+        <Link route="/" replace={true}>
+          <a className="item">Logout</a>
         </Link>
       </Menu.Menu>
     </Menu>
