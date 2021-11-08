@@ -80,9 +80,22 @@ class ApproverDetails extends Component {
 
           {this.renderCampaigns()}
 
-          {this.state.errorMessage && (
-            <Message error header="Oops!" content={this.state.errorMessage} />
-          )}
+          {this.state.errorMessage && <Message error header="Oops!" content={this.state.errorMessage} />}
+
+          <br />
+          <br />
+          <Link route={`/approver/${this.props.add}/allrequest`}>
+            <a>
+              <Button content="View all campaign requests" primary />
+            </a>
+          </Link>
+          <br />
+          <br />
+          <Link route={`/approver/${this.props.add}/pendingrequest`}>
+            <a>
+              <Button content="View pending campaign requests" primary />
+            </a>
+          </Link>
         </div>
       </Layout>
     );
