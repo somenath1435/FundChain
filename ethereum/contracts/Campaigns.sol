@@ -23,7 +23,8 @@ contract Campaigns
     
     Campaign [] public campaigns;
     string [] public status_of_campaigns;
-    
+    uint [] public requestlist_size; //This gives requestslist size for ith campaign
+    uint [] public backerslist_size; //This gives backerslist size for ith campaign
     
     function createcampaign
     (
@@ -56,7 +57,8 @@ contract Campaigns
         campaigns.push(newcampaign);
         status_of_campaigns.push("Pending");
         campaigncount++;
-        
+        requestlist_size.push(0);
+        backerslist_size.push(0);
         
     }
     
@@ -72,7 +74,7 @@ contract Campaigns
     {
         status_of_campaigns[campaignid]=new_status;
         campaigns[campaignid].priority = _priority;
-         campaigns[campaignid].approvedby = approver;
+        campaigns[campaignid].approvedby = approver;
         campaigns[campaignid].typeofcampaign = type_campaign;
     }
     
@@ -100,6 +102,7 @@ contract Campaigns
         campaigns[campaignid].backers[msg.sender] = true;
         campaigns[campaignid].backerscount++;
         campaigns[campaignid].totalmoney +=(msg.value);
+        backerslist_size[campaignid]++;
     }
     
     function create_spend_Request
@@ -126,6 +129,7 @@ contract Campaigns
         requests.push(newRequest);
         campaigns[campaignid1].requestlist.push(requestcount);
         requestcount++;
+        requestlist_size[campaignid1]++;
     }
     
      function approve_spend_Request(uint request_index) public 
