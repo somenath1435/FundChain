@@ -82,6 +82,7 @@ contract Approver
         return(firstname,lastname,phonenum,organisation,id,email);
     }
     
+    uint public requestcount=0;
     uint [] public campaign_request;
     //status [i] = false; this request is still pending;
     bool [] public status;
@@ -93,6 +94,7 @@ contract Approver
         campaign_request.push(campaignid);
         position[campaignid]=status.length;
         status.push(false);
+        requestcount++;
     }
     
     function update_status(uint campaignid) public

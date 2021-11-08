@@ -82,25 +82,32 @@ contract User
         return(firstname,lastname,phonenum,aadharnum,id,email);
     }
     
+    uint public contributed_campaigns_count=0;
     uint [] public contributed_campaigns;
+    uint public created_campaigns_count=0;
     uint [] public created_campaigns;
+    uint public rejected_campaigns_count=0;
     uint [] public rejected_campaigns;
     
     function insert_contributed_campaign(uint campaign_id) public 
     {
         contributed_campaigns.push(campaign_id);
+        contributed_campaigns_count++;
     }
     
     function insert_created_campaign(uint campaign_id) public 
     {
         created_campaigns.push(campaign_id);
+        created_campaigns_count++;
     }
     
     function insert_rejected_campaign(uint campaign_id) public 
     {
         rejected_campaigns.push(campaign_id);
+        rejected_campaigns_count++;
     }
     
+    uint public requestcount=0;
     uint [] public requests;
     //This status will store whether request is pending or approved by this user
     bool [] public status_of_request;
@@ -111,7 +118,7 @@ contract User
         getposition[requestid]=requests.length;
         requests.push(requestid);
         status_of_request.push(false);
-        
+        requestcount++;
     }
     
     function update_completed(uint requestid) public
