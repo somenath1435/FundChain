@@ -165,4 +165,15 @@ contract Campaigns
         campaigns[campaignid].totalmoney -=(request.value);
         request.status = true;
     }
+    
+    function give_backerslist(uint campaignid) public view returns(address [] memory)
+    {
+        /*string memory list ="";
+        uint count = campaigns[campaignid].backerscount;
+        for(uint i=0; i<count; i++)
+        {
+            
+        }*/
+        return campaigns[campaignid].backerslist;
+    }
 }
