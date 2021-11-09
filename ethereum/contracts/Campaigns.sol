@@ -100,6 +100,7 @@ contract Campaigns
         require(msg.value >= campaigns[campaignid].minimumcontribution);
 
         campaigns[campaignid].backers[msg.sender] = true;
+        campaigns[campaignid].backerslist.push(msg.sender);
         campaigns[campaignid].backerscount++;
         campaigns[campaignid].totalmoney +=(msg.value);
         backerslist_size[campaignid]++;
