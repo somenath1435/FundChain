@@ -4,6 +4,8 @@ import Layout from "../../components/layoutlogout";
 import campaignfactory from "../../ethereum/campaigns";
 import approverfactory from "../../ethereum/factory_approvers";
 import ApproverInstance from "../../ethereum/approvers";
+import User1 from "../../ethereum/user";
+import userfactory from "../../ethereum/factory_user";
 import web3 from "../../ethereum/web3";
 import { Router } from "../../routes";
 
@@ -34,22 +36,32 @@ class RequestNew extends Component {
 
       const requestid = await campaignfactory.methods.requestcount().call();
       const campaign = await campaignfactory.methods.campaigns(campaignid).call();
-      const list = await campaignfactory.methods.give_backerslist(campaignid).call();
-      const backerslist = campaign.backerslist;
+      const backerslist = await campaignfactory.methods.get_backerslist(campaignid).call();
+      // const rlist = await campaignfactory.methods.get_requestlist(campaignid).call();
+      // const rcount = await campaignfactory.methods.requestlist_size(campaignid).call();
       const count = campaign.backerscount;
-      console.log(backerslist);
       console.log(count);
-      console.log(requestid);
-      console.log(campaign);
-      console.log(list);
+      // console.log(requestid);
+      // console.log(campaign);
+      console.log(backerslist);
+      // console.log(rcount);
+      // console.log(rlist);
+      const newvalue = web3.utils.toWei(this.state.value, 'ether');
 
-      // await campaignfactory.methods
-      //   .create_spend_Request(this.state.desc, this.state.value, this.state.ethaddress, campaignid)
-      //   .send({ from: accounts[0] });
+      await campaignfactory.methods
+        .create_spend_Request(this.state.desc, newvalue, this.state.ethaddress, campaignid)
+        .send({ from: accounts[0] });
 
-      // this.setState({
-      //   successMessage: "Your spend request is successfully created",
-      // });
+      for (let i = 0; i < count; i++) {
+        const backeradd = backerslist[i];
+        const addr = await userfactory.methods.getstoreaddress(backeradd).call();
+        const user1 = User1(addr);
+        await user1.methods.insert_request(requestid).send({ from: accounts[0] });
+      }
+
+      this.setState({
+        successMessage: "Your spend request is successfully created",
+      });
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }

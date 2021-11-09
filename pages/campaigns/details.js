@@ -323,6 +323,27 @@ class CampaignDetails extends Component {
           </Link>
         )}
 
+        <br />
+        <br />
+
+        {isOwner && (
+          <Link route={`/campaigns/${this.props.campaignid}/pendingrequest`}>
+            <a>
+              <Button content="View Pending Spend Requests" color="brown" />
+            </a>
+          </Link>
+        )}
+        <br />
+        <br />
+
+        {isOwner && (
+          <Link route={`/campaigns/${this.props.campaignid}/completedrequest`}>
+            <a>
+              <Button content="View Completed Spend Requests" color="brown" />
+            </a>
+          </Link>
+        )}
+
         {this.state.errorMessage && <Message error header="Oops!" content={this.state.errorMessage} />}
 
         {this.state.successMessage && <Message success header="Congratulations!" content={this.state.successMessage} />}

@@ -7,6 +7,7 @@ routes
   .add('/campaigns/:campaignid/newrequest', '/campaigns/newrequest')
   .add('/campaigns/:campaignid/pendingrequest', '/campaigns/pendingrequest')
   .add('/campaigns/:campaignid/completedrequest', '/campaigns/completedrequest')
+  .add('/campaigns/:campaignid/request/:requestid', '/campaigns/requestdetails')
   .add('/campaigns/:address/requests', '/campaigns/requests/index')
   .add('/campaigns/:address/requests/new', '/campaigns/requests/new')
   .add('/user/:address','/user/details')
