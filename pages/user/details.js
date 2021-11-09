@@ -110,6 +110,13 @@ class UserDetails extends Component {
               <Button content="View Public Campaigns" primary />
             </a>
           </Link>
+          <br />
+          <br />
+          <Link route={`/user/${this.props.add}/contributedcampaigns`}>
+            <a>
+              <Button content="My Contributed Campaigns" primary />
+            </a>
+          </Link>
         </div>
       </Layout>
     );

@@ -100,6 +100,7 @@ contract Campaigns
         require(msg.value >= campaigns[campaignid].minimumcontribution);
 
         campaigns[campaignid].backers[msg.sender] = true;
+        campaigns[campaignid].backerslist.push(msg.sender);
         campaigns[campaignid].backerscount++;
         campaigns[campaignid].totalmoney +=(msg.value);
         backerslist_size[campaignid]++;
@@ -164,5 +165,15 @@ contract Campaigns
         request.recipient.transfer(request.value);
         campaigns[campaignid].totalmoney -=(request.value);
         request.status = true;
+    }
+    
+    function get_backerslist(uint campaignid) public view returns(address [] memory)
+    {
+        return campaigns[campaignid].backerslist;
+    }
+
+   function get_requestlist(uint campaignid) public view returns(uint [] memory)
+    {
+        return campaigns[campaignid].requestlist;
     }
 }
