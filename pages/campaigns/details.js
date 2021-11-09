@@ -17,10 +17,14 @@ class CampaignDetails extends Component {
     status: [],
     approveloading: false,
     rejectloading: false,
+    contributeloading: false,
     errorMessage: "",
     priority: 0,
     type: "",
     currentaccount: "",
+    isApprover: false,
+    contributevalue: 0,
+    successMessage: "",
   };
 
   static async getInitialProps(props) {
@@ -50,7 +54,10 @@ class CampaignDetails extends Component {
     try {
       const accounts = await web3.eth.getAccounts();
       console.log("accounts[0] is " + accounts[0]);
-      this.setState({ currentaccount: accounts[0] });
+      const checker = await approverfactory.methods.checker(accounts[0]).call();
+      let flag = true;
+      if (checker == false) flag = false;
+      this.setState({ currentaccount: accounts[0], isApprover: flag });
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
@@ -115,8 +122,8 @@ class CampaignDetails extends Component {
         header: "Backers Count",
       },
       {
-        description: totalmoney,
-        header: "Total Money",
+        description: web3.utils.fromWei(totalmoney, "ether"),
+        header: "Total Money (ether)",
       },
     ];
 
@@ -188,12 +195,37 @@ class CampaignDetails extends Component {
     this.setState({ rejectloading: false });
   };
 
+  contribute = async (event) => {
+    event.preventDefault();
+    this.setState({ contributeloading: true, errorMessage: "", successMessage: "" });
+    try {
+      const acc = this.state.currentaccount;
+      const campaignid = this.props.campaignid;
+
+      await campaignfactory.methods
+        .contribute(campaignid)
+        .send({ from: acc, value: web3.utils.toWei(this.state.contributevalue, "ether") });
+
+      const useraddr = await userfactory.methods.getstoreaddress(acc).call();
+      console.log(useraddr);
+      const user1 = User1(useraddr);
+      await user1.methods.insert_contributed_campaign(campaignid).send({ from: acc });
+
+      this.setState({ successMessage: "Your Contribution was successful" });
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+    }
+    this.setState({ contributeloading: false, contributevalue: 0 });
+  };
+
   render() {
     const isPending = this.props.status === "Pending";
     const isApproved = this.props.status === "Approved";
     const isRejected = this.props.status === "Rejected";
     const isOwner = this.props.managerid === this.state.currentaccount;
     const isExtra = isOwner || isApproved;
+    const isApprover = this.state.isApprover;
+    const canContribute = !isApprover && isApproved;
     return (
       <Layout>
         <h3>Campaign Details</h3>
@@ -262,7 +294,38 @@ class CampaignDetails extends Component {
           />
         )}
 
+        <br />
+        <br />
+
+        {canContribute && (
+          <Input
+            placeholder="Enter Amount to contribute to this campaign"
+            label="ether"
+            labelPosition="right"
+            onChange={(event) => this.setState({ contributevalue: event.target.value })}
+          />
+        )}
+
+        {canContribute && (
+          <Button color="violet" onClick={this.contribute} loading={this.state.contributeloading}>
+            Contribute!
+          </Button>
+        )}
+
+        <br />
+        <br />
+
+        {isOwner && (
+          <Link route={`/campaigns/${this.props.campaignid}/newrequest`}>
+            <a>
+              <Button content="Create Spend Request!" color="facebook" />
+            </a>
+          </Link>
+        )}
+
         {this.state.errorMessage && <Message error header="Oops!" content={this.state.errorMessage} />}
+
+        {this.state.successMessage && <Message success header="Congratulations!" content={this.state.successMessage} />}
       </Layout>
     );
   }
