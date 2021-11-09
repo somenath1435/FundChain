@@ -167,14 +167,13 @@ contract Campaigns
         request.status = true;
     }
     
-    function give_backerslist(uint campaignid) public view returns(address [] memory)
+    function get_backerslist(uint campaignid) public view returns(address [] memory)
     {
-        /*string memory list ="";
-        uint count = campaigns[campaignid].backerscount;
-        for(uint i=0; i<count; i++)
-        {
-            
-        }*/
         return campaigns[campaignid].backerslist;
+    }
+
+   function get_requestlist(uint campaignid) public view returns(uint [] memory)
+    {
+        return campaigns[campaignid].requestlist;
     }
 }
