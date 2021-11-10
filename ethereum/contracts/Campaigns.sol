@@ -159,7 +159,7 @@ contract Campaigns
     {
         Request storage request = requests[request_index];
         uint campaignid = request.campaignid;
-        require(request.yescount > ((campaigns[campaignid].backerscount)/2));
+        //require(request.yescount > ((campaigns[campaignid].backerscount)/2));
         require(!request.status);
 
         request.recipient.transfer(request.value);
