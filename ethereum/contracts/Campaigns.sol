@@ -166,7 +166,7 @@ contract Campaigns
         request.recipient.transfer(request.value);
         campaigns[campaignid].totalmoney -=(request.value);
         request.status = true;
-        request.status_str = "Approved and Money Transfered to vendor";
+        request.status_str = "Approved and Money Transfered";
     }
      function disapprove_spend_Request(uint request_index) public 
     {
