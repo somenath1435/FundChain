@@ -176,4 +176,11 @@ contract Campaigns
     {
         return campaigns[campaignid].requestlist;
     }
+    
+    function check_backer(uint campaignid, address _caller) public view returns(bool)
+    {
+        return campaigns[campaignid].backers[_caller];
+        
+    }
+    
 }
