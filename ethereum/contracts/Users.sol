@@ -111,7 +111,7 @@ contract User
     uint [] public requests;
     //This status will store whether request is pending or approved by this user
     bool [] public status_of_request;
-    mapping(uint => uint)getposition;
+    mapping(uint => uint) public getposition;
     
     function insert_request(uint requestid) public
     {
