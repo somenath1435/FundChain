@@ -89,6 +89,7 @@ contract Campaigns
         uint approvalCount;
         mapping(address => bool) approvals;
         uint yescount;
+        string status_str;
     }
     
     uint public requestcount=0;
@@ -124,7 +125,8 @@ contract Campaigns
            status: false,
            approvalCount: 0,
            yescount: 0,
-           campaignid: campaignid1
+           campaignid: campaignid1,
+           status_str: "Pending"
         });
         
         requests.push(newRequest);
@@ -159,12 +161,19 @@ contract Campaigns
     {
         Request storage request = requests[request_index];
         uint campaignid = request.campaignid;
-        //require(request.yescount > ((campaigns[campaignid].backerscount)/2));
         require(!request.status);
 
         request.recipient.transfer(request.value);
         campaigns[campaignid].totalmoney -=(request.value);
         request.status = true;
+        request.status_str = "Approved and Money Transfered to vendor";
+    }
+     function disapprove_spend_Request(uint request_index) public 
+    {
+        Request storage request = requests[request_index];
+        require(!request.status);
+        request.status = true;
+        request.status_str = "Rejected by Backers";
     }
     
     function get_backerslist(uint campaignid) public view returns(address [] memory)
