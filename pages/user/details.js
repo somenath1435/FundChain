@@ -117,6 +117,20 @@ class UserDetails extends Component {
               <Button content="My Contributed Campaigns" primary />
             </a>
           </Link>
+          <br />
+          <br />
+          <Link route={`/user/${this.props.add}/pendingrequest`}>
+            <a>
+              <Button content="View Pending Spend Requests" primary />
+            </a>
+          </Link>
+          <br />
+          <br />
+          <Link route={`/user/${this.props.add}/completedrequest`}>
+            <a>
+              <Button content="View Completed Spend Requests" primary />
+            </a>
+          </Link>
         </div>
       </Layout>
     );

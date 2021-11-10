@@ -51,7 +51,7 @@ class CompletedRequest extends Component {
         <List>
           <List.Item>Campaign Id: {req.campaignid}</List.Item>
           <List.Item>Request Id: {req.requestid}</List.Item>
-          <List.Item>Amount: {req.value}</List.Item>
+          <List.Item>Amount: {web3.utils.fromWei(req.value, "ether")}</List.Item>
           <List.Item>Status: Not Pending</List.Item>
           <Button primary floated="right" onClick={(e) => this.showDetails(e, req.requestid)}>
             Show Details

@@ -4,31 +4,34 @@ import Layout from "../../components/layoutlogout";
 import { Link, Router } from "../../routes";
 import web3 from "../../ethereum/web3";
 import campaignfactory from "../../ethereum/campaigns";
+import User1 from "../../ethereum/user";
+import userfactory from "../../ethereum/factory_user";
 
 class PendingRequest extends Component {
   state = {
     requestcount: 0,
     requests: [],
-    status: [],
   };
 
   static async getInitialProps(props) {
-    const campaignid = props.query.campaignid;
-    return { campaignid };
+    const address = props.query.address;
+    return { address };
   }
 
   async componentDidMount() {
     try {
-      const campaignid = this.props.campaignid;
-      const count = await campaignfactory.methods.requestlist_size(campaignid).call();
-      const requestlist = await campaignfactory.methods.get_requestlist(campaignid).call();
+      const addr = await userfactory.methods.getstoreaddress(this.props.address).call();
+      const user1 = User1(addr);
+      const count = await user1.methods.requestcount().call();
+      console.log(count);
 
       let arr = [];
       let len = 0;
       for (let i = 0; i < count; i++) {
-        const requestid = requestlist[i];
-        const req = await campaignfactory.methods.requests(requestid).call();
-        if (req.status === false) {
+        const requestid = await user1.methods.requests(i).call();
+        const status = await user1.methods.status_of_request(i).call();
+        if (status === false) {
+          const req = await campaignfactory.methods.requests(requestid).call();
           arr.push(req);
           len++;
         }
@@ -39,10 +42,10 @@ class PendingRequest extends Component {
     }
   }
 
-  showDetails(e, reqid) {
+  showDetails(e, reqid, campaignid) {
     e.preventDefault();
     console.log(reqid);
-    Router.pushRoute(`/campaigns/${this.props.campaignid}/request/${reqid}`);
+    Router.pushRoute(`/campaigns/${campaignid}/request/${reqid}`);
   }
 
   displayRequests() {
@@ -53,7 +56,7 @@ class PendingRequest extends Component {
           <List.Item>Request Id: {req.requestid}</List.Item>
           <List.Item>Amount: {web3.utils.fromWei(req.value, "ether")}</List.Item>
           <List.Item>Status: Pending</List.Item>
-          <Button primary floated="right" onClick={(e) => this.showDetails(e, req.requestid)}>
+          <Button primary floated="right" onClick={(e) => this.showDetails(e, req.requestid, req.campaignid)}>
             Show Details
           </Button>
         </List>
