@@ -14,6 +14,8 @@ routes
   .add('/user/:address/approvedcampaigns','/user/approvedcampaigns')
   .add('/user/:address/rejectedcampaigns','/user/rejectedcampaigns')
   .add('/user/:address/contributedcampaigns','/user/contributedcampaigns')
+  .add('/user/:address/pendingrequest','/user/pendingrequest')
+  .add('/user/:address/completedrequest','/user/completedrequest')
   .add('/approver/:address','/approver/details')
   .add('/approver/:address/allrequest','/approver/allrequest')
   .add('/approver/:address/pendingrequest','/approver/pendingrequest')

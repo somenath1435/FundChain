@@ -96,7 +96,7 @@ class CampaignDetails extends Component {
       },
     ];
 
-    return <Card.Group items={items} />;
+    return <Card.Group items={items} itemsPerRow="3" />;
   }
 
   renderExtraCards() {
@@ -127,7 +127,7 @@ class CampaignDetails extends Component {
       },
     ];
 
-    return <Card.Group items={items} />;
+    return <Card.Group items={items} itemsPerRow="3" />;
   }
 
   onApprove = async () => {
@@ -256,24 +256,20 @@ class CampaignDetails extends Component {
         </Grid>
 
         <br />
-        <br />
 
-        {isPending && (
+        {isPending && <br /> && <br /> && (
           <Button negative onClick={this.onReject} disabled={!isPending} loading={this.state.rejectloading}>
             Reject Request
           </Button>
         )}
 
-        {isPending && (
+        {isPending && <br /> && <br /> && (
           <Button positive onClick={this.onApprove} disabled={!isPending} loading={this.state.approveloading}>
             Approve Request
           </Button>
         )}
 
-        <br />
-        <br />
-
-        {isPending && (
+        {isPending && <br /> && (
           <Input
             placeholder="Enter Priority (1-5) during approval"
             disabled={!isPending}
@@ -282,9 +278,7 @@ class CampaignDetails extends Component {
           />
         )}
 
-        <br />
-
-        {isPending && (
+        {isPending && <br /> && (
           <Input
             value={this.state.type}
             placeholder="Enter Type of Campaign during approval"
@@ -294,10 +288,7 @@ class CampaignDetails extends Component {
           />
         )}
 
-        <br />
-        <br />
-
-        {canContribute && (
+        {canContribute && <br /> && (
           <Input
             placeholder="Enter Amount to contribute to this campaign"
             label="ether"
@@ -312,10 +303,7 @@ class CampaignDetails extends Component {
           </Button>
         )}
 
-        <br />
-        <br />
-
-        {isOwner && (
+        {isOwner && <br /> && <br /> && (
           <Link route={`/campaigns/${this.props.campaignid}/newrequest`}>
             <a>
               <Button content="Create Spend Request!" color="facebook" />
@@ -323,23 +311,18 @@ class CampaignDetails extends Component {
           </Link>
         )}
 
-        <br />
-        <br />
-
-        {isOwner && (
+        {isOwner && <br /> && <br /> && (
           <Link route={`/campaigns/${this.props.campaignid}/pendingrequest`}>
             <a>
-              <Button content="View Pending Spend Requests" color="brown" />
+              <Button content="View Pending Spend Requests" color="teal" />
             </a>
           </Link>
         )}
-        <br />
-        <br />
 
-        {isOwner && (
+        {isOwner && <br /> && <br /> && (
           <Link route={`/campaigns/${this.props.campaignid}/completedrequest`}>
             <a>
-              <Button content="View Completed Spend Requests" color="brown" />
+              <Button content="View Completed Spend Requests" color="teal" />
             </a>
           </Link>
         )}
