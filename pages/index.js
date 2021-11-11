@@ -2,14 +2,26 @@ import React, { Component } from 'react';
 import { Card, Button } from 'semantic-ui-react';
 // import factory from '../ethereum/factory';
 import Layout from '../components/Layout';
+import IPFSUpload from '../components/IPFSUpload';
 import { Link } from '../routes';
 
 class CampaignIndex extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fileLink: ''
+    }
+    this.setLink = this.setLink.bind(this);
+
+  }
   // static async getInitialProps() {
   //   // const campaigns = await factory.methods.getDeployedCampaigns().call();
 
   //   // return { campaigns };
   // }
+  setLink(link) {
+    this.setState({ fileLink: link });
+  }
 
   renderCampaigns() {
     const items = this.props.campaigns.map(address => {
@@ -45,6 +57,11 @@ class CampaignIndex extends Component {
           </Link> */}
 
           {/* {this.renderCampaigns()} */}
+
+          <IPFSUpload setLink={this.setLink} />
+          <div>
+            <h1>{this.state.fileLink ? this.state.fileLink : ""}</h1>
+            </div>
         </div>
       </Layout>
     );
