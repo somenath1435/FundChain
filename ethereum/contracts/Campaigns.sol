@@ -31,7 +31,8 @@ contract Campaigns
         string description1,
         string targetcity1,
         uint minimumcontribution1,
-        address managerid1
+        address managerid1,
+        string _proposalhash
     )
     public
     {
@@ -47,7 +48,7 @@ contract Campaigns
            managerid: managerid1,
            priority: 0,
            approvedby: 0x0000000000000000,
-           proposalhash: "0x0000000000000000",
+           proposalhash: _proposalhash,
            backerscount: 0,
            requestlist: initialize_array,
            backerslist: _backerslist,
@@ -90,6 +91,7 @@ contract Campaigns
         mapping(address => bool) approvals;
         uint yescount;
         string status_str;
+        string proposalhash;
     }
     
     uint public requestcount=0;
@@ -112,7 +114,8 @@ contract Campaigns
         string _description, 
         uint value,
         address recipient,
-        uint campaignid1
+        uint campaignid1,
+        string _proposalhash
     )
     public 
     {
@@ -126,7 +129,8 @@ contract Campaigns
            approvalCount: 0,
            yescount: 0,
            campaignid: campaignid1,
-           status_str: "Pending"
+           status_str: "Pending",
+           proposalhash: _proposalhash
         });
         
         requests.push(newRequest);
