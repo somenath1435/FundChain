@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button, Input, Message } from "semantic-ui-react";
+import { Form, Button, Input, Message, TextArea } from "semantic-ui-react";
 import Layout from "../../components/layoutlogout";
 import campaignfactory from "../../ethereum/campaigns";
 import approverfactory from "../../ethereum/factory_approvers";
@@ -8,15 +8,34 @@ import User1 from "../../ethereum/user";
 import userfactory from "../../ethereum/factory_user";
 import web3 from "../../ethereum/web3";
 import { Router } from "../../routes";
+import IPFSUpload from "../../components/IPFSUpload";
 
 class RequestNew extends Component {
-  state = {
-    value: "",
-    desc: "",
-    ethaddress: "",
-    errorMessage: "",
-    successMessage: "",
-    loading: false,
+  // state = {
+  //   value: "",
+  //   desc: "",
+  //   ethaddress: "",
+  //   errorMessage: "",
+  //   successMessage: "",
+  //   loading: false,
+  // };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: "",
+      desc: "",
+      ethaddress: "",
+      errorMessage: "",
+      successMessage: "",
+      loading: false,
+      fileLink: "",
+    };
+    this.setLink = this.setLink.bind(this);
+  }
+
+  setLink = (link) => {
+    this.setState({ fileLink: link });
   };
 
   static async getInitialProps(props) {
@@ -34,6 +53,10 @@ class RequestNew extends Component {
       const accounts = await web3.eth.getAccounts();
       const campaignid = this.props.campaignid;
 
+      console.log(this.state.fileLink);
+      const link = this.state.fileLink ? this.state.fileLink : "0x0000000000000000";
+      console.log("uploaded link: " + link);
+
       const requestid = await campaignfactory.methods.requestcount().call();
       const campaign = await campaignfactory.methods.campaigns(campaignid).call();
       const backerslist = await campaignfactory.methods.get_backerslist(campaignid).call();
@@ -46,10 +69,10 @@ class RequestNew extends Component {
       console.log(backerslist);
       // console.log(rcount);
       // console.log(rlist);
-      const newvalue = web3.utils.toWei(this.state.value, 'ether');
+      const newvalue = web3.utils.toWei(this.state.value, "ether");
 
       await campaignfactory.methods
-        .create_spend_Request(this.state.desc, newvalue, this.state.ethaddress, campaignid)
+        .create_spend_Request(this.state.desc, newvalue, this.state.ethaddress, campaignid, link)
         .send({ from: accounts[0] });
 
       for (let i = 0; i < count; i++) {
@@ -74,6 +97,12 @@ class RequestNew extends Component {
       <Layout>
         <h3>Create a Spend Request</h3>
 
+        <IPFSUpload setLink={this.setLink} />
+        <h4>{this.state.fileLink ? "Status: Upload Successful" : "Status: No files uploaded"}</h4>
+
+        <br />
+        <br />
+
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
             <label>Spend Amount</label>
@@ -86,7 +115,7 @@ class RequestNew extends Component {
           </Form.Field>
           <Form.Field>
             <label>Enter Description</label>
-            <Input value={this.state.desc} onChange={(event) => this.setState({ desc: event.target.value })} />
+            <TextArea value={this.state.desc} onChange={(event) => this.setState({ desc: event.target.value })} />
           </Form.Field>
           <Form.Field>
             <label>Recipient Ethereum Address</label>

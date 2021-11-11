@@ -28,6 +28,7 @@ class RequestDetails extends Component {
     votegiven: false,
     backerscount: 0,
     priority: 0,
+    proposalhash: "",
   };
 
   static async getInitialProps(props) {
@@ -63,6 +64,7 @@ class RequestDetails extends Component {
         approvalCount: req.approvalCount,
         yescount: req.yescount,
         status_str: req.status_str,
+        proposalhash: req.proposalhash,
         backerscount: backerscount,
         priority: campaigndetails.priority,
       });
@@ -245,10 +247,24 @@ class RequestDetails extends Component {
     this.setState({ rejectloading: false });
   };
 
+  showProposal = (e) => {
+    e.preventDefault();
+    try {
+      window.open(this.state.proposalhash);
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+    }
+    // window.open("https://www.facebook.com/");
+  };
+
   render() {
     return (
       <Layout>
         <h3>Request Details</h3>
+
+        {this.state.proposalhash !== "0x0000000000000000" && (
+          <Button primary floated="right" onClick={this.showProposal} content="Show Proposal" />
+        )}
         <Grid>
           <Grid.Row>
             <Grid.Column>{this.renderCards()}</Grid.Column>

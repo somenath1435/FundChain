@@ -37,7 +37,8 @@ app.post('/upload', async (req, res) => {
     const file = req.files.file;
     const data = file.data;
     const fileName = file.name;
-    const filePath = 'files/' + fileName;
+    const filePath = 'files\\' + fileName;
+    console.log(filePath);
     // console.log(file, fileName, filePath);
     file.mv(filePath, async (err) => {
         if (err) {
@@ -53,7 +54,7 @@ app.post('/upload', async (req, res) => {
 
     // return res.status(201).send('Oh my this went perfecctly');
     console.log(fileHash);
-    return res.status(201).send(`http://localhost:8081/ipfs/${fileHash}`);
+    return res.status(201).send(`http://localhost:8080/ipfs/${fileHash}`);
 })
 
 const addfile = async (filename, data) => {
