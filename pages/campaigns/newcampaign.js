@@ -1,21 +1,42 @@
 import React, { Component } from "react";
-import { Form, Button, Input, Message } from "semantic-ui-react";
+import { Form, Button, Input, Message, TextArea } from "semantic-ui-react";
 import Layout from "../../components/layoutlogout";
 import campaignfactory from "../../ethereum/campaigns";
 import approverfactory from "../../ethereum/factory_approvers";
 import ApproverInstance from "../../ethereum/approvers";
 import web3 from "../../ethereum/web3";
 import { Router } from "../../routes";
+import IPFSUpload from "../../components/IPFSUpload";
 
 class CampaignNew extends Component {
-  state = {
-    minimumContribution: "",
-    city: "",
-    desc: "",
-    ethaddress: "",
-    errorMessage: "",
-    successMessage: "",
-    loading: false,
+  // state = {
+  //   minimumContribution: "",
+  //   city: "",
+  //   desc: "",
+  //   ethaddress: "",
+  //   errorMessage: "",
+  //   successMessage: "",
+  //   link: "",
+  //   loading: false,
+  // };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      minimumContribution: "",
+      city: "",
+      desc: "",
+      ethaddress: "",
+      errorMessage: "",
+      successMessage: "",
+      fileLink: "",
+      loading: false,
+    };
+    this.setLink = this.setLink.bind(this);
+  }
+
+  setLink = (link) => {
+    this.setState({ fileLink: link });
   };
 
   onSubmit = async (event) => {
@@ -26,6 +47,10 @@ class CampaignNew extends Component {
     try {
       const accounts = await web3.eth.getAccounts();
 
+      console.log(this.state.fileLink);
+      const link = this.state.fileLink ? this.state.fileLink : "0x0000000000000000";
+      console.log("uploaded link: " + link);
+
       const approvercount = await approverfactory.methods.approvercount().call();
       const campaigncount = await campaignfactory.methods.campaigncount().call();
       const pos = campaigncount % approvercount;
@@ -33,9 +58,10 @@ class CampaignNew extends Component {
       console.log(approveraddress);
       const addr = await approverfactory.methods.getstoreaddress(approveraddress).call();
       const approverInstance = ApproverInstance(addr);
+      console.log(this.state.desc);
 
       await campaignfactory.methods
-        .createcampaign(this.state.desc, this.state.city, this.state.minimumContribution, this.state.ethaddress)
+        .createcampaign(this.state.desc, this.state.city, this.state.minimumContribution, this.state.ethaddress, link)
         .send({ from: accounts[0] });
 
       await approverInstance.methods.insert_campaign_request(campaigncount).send({ from: accounts[0] });
@@ -56,6 +82,12 @@ class CampaignNew extends Component {
       <Layout>
         <h3>Create a Campaign</h3>
 
+        <IPFSUpload setLink={this.setLink} />
+        <h4>{this.state.fileLink ? "Status: Upload Successful" : "Status: No files uploaded"}</h4>
+
+        <br />
+        <br />
+
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
             <label>Minimum Contribution</label>
@@ -68,7 +100,7 @@ class CampaignNew extends Component {
           </Form.Field>
           <Form.Field>
             <label>Enter Description</label>
-            <Input value={this.state.desc} onChange={(event) => this.setState({ desc: event.target.value })} />
+            <TextArea value={this.state.desc} onChange={(event) => this.setState({ desc: event.target.value })} />
           </Form.Field>
           <Form.Field>
             <label>Target City</label>
@@ -83,9 +115,10 @@ class CampaignNew extends Component {
           </Form.Field>
 
           <Button loading={this.state.loading} primary>
-            Create!
+            Create Campaign!
           </Button>
         </Form>
+
         {this.state.errorMessage && <Message error header="Oops!" content={this.state.errorMessage} />}
 
         {this.state.successMessage && <Message success header="Congratulations!" content={this.state.successMessage} />}

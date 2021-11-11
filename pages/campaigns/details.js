@@ -44,7 +44,7 @@ class CampaignDetails extends Component {
       typeofcampaign: campaign.typeofcampaign,
       priorityofcampaign: campaign.priority,
       approvedby: campaign.approvedby,
-      proposalhash: campaign.typeofcampaign,
+      proposalhash: campaign.proposalhash,
       backerscount: campaign.backerscount,
       totalmoney: campaign.totalmoney,
     };
@@ -218,6 +218,16 @@ class CampaignDetails extends Component {
     this.setState({ contributeloading: false, contributevalue: 0 });
   };
 
+  showProposal = (e) => {
+    e.preventDefault();
+    try {
+      window.open(this.props.proposalhash);
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+    }
+    // window.open("https://www.facebook.com/");
+  };
+
   render() {
     const isPending = this.props.status === "Pending";
     const isApproved = this.props.status === "Approved";
@@ -226,9 +236,14 @@ class CampaignDetails extends Component {
     const isExtra = isOwner || isApproved;
     const isApprover = this.state.isApprover;
     const canContribute = !isApprover && isApproved;
+    const link = this.props.proposalhash;
+    const isProposal = link !== "0x0000000000000000";
     return (
       <Layout>
         <h3>Campaign Details</h3>
+
+        {isProposal && <Button primary floated="right" onClick={this.showProposal} content="Show Proposal" />}
+
         <Grid>
           <Grid.Row>
             <Grid.Column>{this.renderCards()}</Grid.Column>
