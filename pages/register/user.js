@@ -58,8 +58,6 @@ class User extends Component {
 
   render() {
     return (
-      <Layout>
-        <h1>User Registration Page</h1>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
             <label>Enter User First Name</label>
@@ -117,7 +115,6 @@ class User extends Component {
             Register!
           </Button>
         </Form>
-      </Layout>
     );
   }
 }

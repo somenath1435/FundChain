@@ -334,7 +334,7 @@ class CampaignDetails extends Component {
           </Link>
         )}
 
-        {isOwner && <br /> && <br /> && (
+        {!isOwner && <br /> && <br /> && (
           <Link route={`/campaigns/${this.props.campaignid}/completedrequest`}>
             <a>
               <Button content="View Completed Spend Requests" color="teal" />

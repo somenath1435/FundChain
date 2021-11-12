@@ -36,12 +36,10 @@ class Approver extends Component {
 
   render() {
     return (
-      <Layout>
-        <h1>Approver Login Page</h1>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
-            <label>Enter Approver Ethereum Address</label>
             <Input
+              placeholder="Enter ethereum address"
               value={this.state.ethaddress}
               onChange={(event) =>
                 this.setState({ ethaddress: event.target.value })
@@ -50,11 +48,10 @@ class Approver extends Component {
           </Form.Field>
 
           <Message error header="Oops!" content={this.state.errorMessage} />
-          <Button primary loading={this.state.loading}>
+          <Button color='violet' loading={this.state.loading} style={{margin: "20px 0 20px 0"}}>
             Login!
           </Button>
         </Form>
-      </Layout>
     );
   }
 }
