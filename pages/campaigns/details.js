@@ -31,7 +31,6 @@ class CampaignDetails extends Component {
     const campaignid = props.query.campaignid;
 
     const campaign = await campaignfactory.methods.campaigns(campaignid).call();
-    console.log(campaign);
     const status = await campaignfactory.methods.status_of_campaigns(campaignid).call();
 
     return {
@@ -258,16 +257,6 @@ class CampaignDetails extends Component {
               <Grid.Column>{this.renderExtraCards()}</Grid.Column>
             </Grid.Row>
           )}
-
-          {/* <Grid.Row>
-            <Grid.Column>
-              <Link route={`/campaigns/${this.props.address}/requests`}>
-                <a>
-                  <Button primary>View Requests</Button>
-                </a>
-              </Link>
-            </Grid.Column>
-          </Grid.Row> */}
         </Grid>
 
         <br />
@@ -292,6 +281,8 @@ class CampaignDetails extends Component {
             onChange={(event) => this.setState({ priority: event.target.value })}
           />
         )}
+
+        <br />
 
         {isPending && <br /> && (
           <Input
