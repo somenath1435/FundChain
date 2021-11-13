@@ -1,20 +1,30 @@
-import React from 'react';
-import { Container } from 'semantic-ui-react';
-import Head from 'next/head';
-import Logout from './logout';
+import React from "react";
+import { Container } from "semantic-ui-react";
+import Head from "next/head";
+import Logout from "./logout";
 
-export default props => {
+const styles = {
+  paperContainer: {
+    height: 900,
+    width: 1600,
+    backgroundPosition: "center",
+    // background: "#444",
+    // backgroundImage: `url(${"http://localhost:3000/static/src/img/p2.jpg"})`,
+    backgroundImage: `url(${"https://images.unsplash.com/photo-1585314062604-1a357de8b000?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1471&q=80"})`,
+  },
+};
+
+export default (props) => {
   return (
-    <Container>
-      <Head>
-        <link
-          rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
-        />
-      </Head>
+    <div style={styles.paperContainer}>
+      <Container>
+        <Head>
+          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
+        </Head>
 
-      <Logout/>
-      {props.children}
-    </Container>
+        <Logout />
+        {props.children}
+      </Container>
+    </div>
   );
 };

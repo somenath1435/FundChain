@@ -43,6 +43,7 @@ class CampaignIndex extends Component {
     return (
       <Layout>
         <Header style={{
+          textAlign: "center",
           fontSize: "100px",
           fontWeight: "bold",
           letterSpacing: "30px",
@@ -51,7 +52,7 @@ class CampaignIndex extends Component {
         }}>FundChain</Header>
         <Header style={{
           textAlign: "center",
-          fontSize: "30px",
+          fontSize: "40px",
           fontWeight: "bold",
           letterSpacing: "3px",
           lineHeight: "10px",
@@ -62,12 +63,12 @@ class CampaignIndex extends Component {
           <Grid columns={2} relaxed='very' stackable>
             <Grid.Column>
               <Link route="/register">
-                <Button secondary content="Register" />
+                <Button primary content="Register" />
               </Link>
             </Grid.Column>
             <Grid.Column verticalAlign='middle'>
               <Link route="/login">
-                <Button secondary content="Login" />
+                <Button primary content="Login" />
               </Link>
             </Grid.Column>
           </Grid>
