@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import { Link } from '../../routes';
+import React, { Component } from "react";
+import { Link } from "../../routes";
 import { Card, Message, Button, Header, Icon, Accordion, Segment } from "semantic-ui-react";
 import Layout from "../../components/layoutlogout";
 import User1 from "../../ethereum/user";
@@ -19,12 +19,12 @@ class UserDetails extends Component {
   };
 
   handleClick = (e, titleProps) => {
-    const { index } = titleProps
-    const { activeIndex } = this.state
-    const newIndex = activeIndex === index ? -1 : index
+    const { index } = titleProps;
+    const { activeIndex } = this.state;
+    const newIndex = activeIndex === index ? -1 : index;
 
-    this.setState({ activeIndex: newIndex })
-  }
+    this.setState({ activeIndex: newIndex });
+  };
 
   static async getInitialProps(props) {
     //call api
@@ -62,62 +62,61 @@ class UserDetails extends Component {
         description: this.props.add,
         style: {
           border: "2px solid white!important",
-          overflowWrap: "break-word"
-        }
+          overflowWrap: "break-word",
+        },
       },
       {
         header: "First Name",
         description: this.state.fname,
         style: {
           border: "2px solid white!important",
-          overflowWrap: "break-word"
-        }
+          overflowWrap: "break-word",
+        },
       },
       {
         header: "Last Name",
         description: this.state.lname,
         style: {
           border: "2px solid white!important",
-          overflowWrap: "break-word"
-        }
+          overflowWrap: "break-word",
+        },
       },
       {
         header: "Phone Number",
         description: this.state.phone,
         style: {
           border: "2px solid white!important",
-          overflowWrap: "break-word"
-        }
+          overflowWrap: "break-word",
+        },
       },
       {
         header: "Adhaar Number",
         description: this.state.adhaar,
         style: {
           border: "2px solid white!important",
-          overflowWrap: "break-word"
-        }
+          overflowWrap: "break-word",
+        },
       },
       {
         header: "Email",
         description: this.state.email,
         style: {
           border: "2px solid white!important",
-          overflowWrap: "break-word"
-        }
+          overflowWrap: "break-word",
+        },
       },
     ];
 
-    return <Card.Group style={{}} items={items} />;
+    return <Card.Group items={items} />;
   }
 
-
   render() {
-    const { activeIndex } = this.state
+    const { activeIndex } = this.state;
 
     return (
       <Layout>
         <div>
-          <Header size="large">User Details</Header>
+          <Header size="large" style={{color : "#fff"}}>User Details</Header>
 
           {this.renderCampaigns()}
 
@@ -125,46 +124,38 @@ class UserDetails extends Component {
 
           <Segment >
             <Accordion>
-              <Accordion.Title
-                active={activeIndex === 0}
-                index={0}
-                onClick={this.handleClick}
-              >
-                <Icon name='dropdown' />
+              <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
+                <Icon name="dropdown" />
                 Campaigns
               </Accordion.Title>
               <Accordion.Content active={activeIndex === 0}>
                 <Button.Group>
                   <Link route={`/campaigns/newcampaign`}>
-                    <Button color="violet" content="Create New Campaign" primary />
+                    <Button color="violet" content="Create New Campaign" />
                   </Link>
-                  <Button.Or/>
+                  <Button.Or />
                   <Link route={`/user/${this.props.add}/approvedcampaigns`}>
-                    <Button color="violet" content="My Approved Campaigns" primary />
+                    <Button color="violet" content="My Approved Campaigns" />
                   </Link>
                   <Button.Or />
 
                   <Link route={`/user/${this.props.add}/rejectedcampaigns`}>
-                    <Button color="violet" content="My Rejected Campaigns" primary />
+                    <Button color="violet" content="My Rejected Campaigns" />
                   </Link>
                   <Button.Or />
 
                   <Link route={`/campaigns/allcampaign`}>
-                    <Button color="violet" content="View Public Campaigns" primary />
+                    <Button color="violet" content="View Public Campaigns" />
                   </Link>
                   <Button.Or />
                   <Link route={`/user/${this.props.add}/contributedcampaigns`}>
-                    <Button color="violet" content="My Contributed Campaigns" primary />
+                    <Button color="violet" content="My Contributed Campaigns" />
                   </Link>
                 </Button.Group>
               </Accordion.Content>
 
-              <Accordion.Title
-                active={activeIndex === 1}
-                index={1}
-                onClick={this.handleClick}
-              >
-                <Icon name='dropdown' />
+              <Accordion.Title active={activeIndex === 1} index={1} onClick={this.handleClick}>
+                <Icon name="dropdown" />
                 Requests
               </Accordion.Title>
               <Accordion.Content active={activeIndex === 1}>

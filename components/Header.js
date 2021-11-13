@@ -1,35 +1,23 @@
-import React from 'react';
-import { Container } from 'semantic-ui-react';
-import { Menu } from 'semantic-ui-react';
-import { Link } from '../routes';
+import React from "react";
+import { Menu } from "semantic-ui-react";
+import { Link } from "../routes";
 
-export default props => {
-  const { isLogout } = props;
+export default () => {
   return (
-    <Menu fixed='top' >
-      <Container>
-        <Menu.Item as='a' header style={{ fontSize: '20px' }}>
-          <Link route="/">
-            FundChain
-          </Link>
-        </Menu.Item>
+    <Menu>
+      <Link route="/">
+        <a className="item">FundChain</a>
+      </Link>
 
-        {isLogout && (      <Menu.Menu position="right">
-        <Link route="/" replace={true}>
-          <a className="item">Logout</a>
+      <Menu.Menu position="right">
+        <Link route="/register">
+          <a className="item">Register</a>
         </Link>
-      </Menu.Menu>)}
-        {!isLogout && (        <Menu.Menu position="right">
-          <Link route="/register">
-            <a className="item">Register</a>
-          </Link>
 
-          <Link route="/login">
-            <a className="item">Login</a>
-          </Link>
-        </Menu.Menu>)}
-
-      </Container>
+        <Link route="/login">
+          <a className="item">Login</a>
+        </Link>
+      </Menu.Menu>
     </Menu>
   );
 };

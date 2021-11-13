@@ -22,7 +22,7 @@ class User extends Component {
       console.log(this.state.ethaddress);
       const accounts = await web3.eth.getAccounts();
       console.log("accounts[0] is "+accounts[0]);
-      // if(this.state.ethaddress!==accounts[0]) throw Error("Input Ethereum address is different from Metamask account address");
+      if(this.state.ethaddress!==accounts[0]) throw Error("Input Ethereum address is different from Metamask account address");
       const checker = await factory.methods.checker(this.state.ethaddress).call();
       if(checker==false) throw Error("This Address is not registered");
 
