@@ -285,8 +285,7 @@ class CampaignDetails extends Component {
             onChange={(event) => this.setState({ type: event.target.value })}
           />
         )}
-
-        {canContribute && <br /> && (
+        {canContribute && (
           <Input
             placeholder="Enter Amount to contribute to this campaign"
             label="ether"
@@ -294,28 +293,29 @@ class CampaignDetails extends Component {
             onChange={(event) => this.setState({ contributevalue: event.target.value })}
           />
         )}
-        <Button.Group widths={1}>
           {canContribute && (
-            <Button color='facebook' color="violet" onClick={this.contribute} loading={this.state.contributeloading}>
+            <Button color="violet" onClick={this.contribute} loading={this.state.contributeloading}>
               Contribute!
             </Button>
           )}
-
-          {!isOwner && <br /> && <br /> && (
+          <br />
+          <br />
+        <Button.Group vertical style={{}}>
+          {isOwner && (
             <Link route={`/campaigns/${this.props.campaignid}/newrequest`}>
               <a>
-                <Button color='facebook' content="Create Spend Request!" color="facebook" />
+                <Button content="Create Spend Request!" color="facebook" />
               </a>
             </Link>
           )}
 
-          {!isOwner && <br /> && <br /> && (
+          {isOwner &&  (
             <Link route={`/campaigns/${this.props.campaignid}/pendingrequest`}>
-                <Button color='facebook' content="View Pending Spend Requests"/>
+                <Button content="View Pending Spend Requests"/>
             </Link>
           )}
 
-          {!isOwner && <br /> && <br /> && (
+          {isOwner &&  (
             <Link route={`/campaigns/${this.props.campaignid}/completedrequest`}>
                 <Button color='facebook' content="View Completed Spend Requests"/>
             </Link>
@@ -327,12 +327,12 @@ class CampaignDetails extends Component {
         {this.state.successMessage && <Message success header="Congratulations!" content={this.state.successMessage} />}
         <Button.Group vertical widths={2}>
           {isProposal && <Button color='facebook' primary floated="right" onClick={this.showProposal} content="Show Proposal" />}
-          {!isPending && (
+          {isPending && (
             <Button color='facebook' negative onClick={this.onReject} disabled={!isPending} loading={this.state.rejectloading}>
               Reject Request
             </Button>
           )}
-          {!isPending && (
+          {isPending && (
             <Button color='facebook' inverted positive onClick={this.onApprove} disabled={!isPending} loading={this.state.approveloading}>
               Approve Request
             </Button>
