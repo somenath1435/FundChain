@@ -5,7 +5,7 @@ import Header from './Header';
 
 export default props => {
   return (
-    <div style={{backgroundColor: "#eef", height: "100vh", width: "100%"}}>
+    <div style={{backgroundColor: "#000", height: "100vh", width: "100%"}}>
       <Head>
         <title>FundChain</title>
         <link rel="icon" href="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/krinnxb23kgp75s0jyhp" />
