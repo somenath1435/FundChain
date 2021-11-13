@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Card, Button } from "semantic-ui-react";
+import { Card, Button, Segment, Grid, Form, Divider } from "semantic-ui-react";
 // import factory from '../ethereum/factory';
 import Layout from "../components/Layout";
 import IPFSUpload from "../components/IPFSUpload";
 import { Link } from "../routes";
+import { Header } from "semantic-ui-react";
 
 class CampaignIndex extends Component {
   constructor(props) {
@@ -41,27 +42,39 @@ class CampaignIndex extends Component {
   render() {
     return (
       <Layout>
-        <div>
-          <h3>Open Campaigns</h3>
+        <Header style={{
+          textAlign: "center",
+          fontSize: "100px",
+          fontWeight: "bold",
+          letterSpacing: "30px",
+          padding: "100px 0 0 0",
+          color: "#fff"
+        }}>FundChain</Header>
+        <Header style={{
+          textAlign: "center",
+          fontSize: "40px",
+          fontWeight: "bold",
+          letterSpacing: "3px",
+          lineHeight: "10px",
+          padding: "40px 0 40px 0",
+          color: "#fff"
+        }}> Transparent Fundraising Platform</Header>
+        <Segment placeholder style={{padding: "20px"}}>
+          <Grid columns={2} relaxed='very' stackable>
+            <Grid.Column>
+              <Link route="/register">
+                <Button primary content="Register" />
+              </Link>
+            </Grid.Column>
+            <Grid.Column verticalAlign='middle'>
+              <Link route="/login">
+                <Button primary content="Login" />
+              </Link>
+            </Grid.Column>
+          </Grid>
 
-          {/* <Link route="/campaigns/new">
-            <a>
-              <Button
-                floated="right"
-                content="Create Campaign"
-                icon="add circle"
-                primary
-              />
-            </a>
-          </Link> */}
-
-          {/* {this.renderCampaigns()} */}
-
-          {/* <IPFSUpload setLink={this.setLink} />
-          <div>
-            <h1>{this.state.fileLink ? this.state.fileLink : ""}</h1>
-          </div> */}
-        </div>
+          <Divider vertical>Or</Divider>
+        </Segment>
       </Layout>
     );
   }
