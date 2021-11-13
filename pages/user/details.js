@@ -123,8 +123,8 @@ class UserDetails extends Component {
 
           {this.state.errorMessage && <Message error header="Oops!" content={this.state.errorMessage} />}
 
-          <Segment inverted>
-            <Accordion inverted>
+          <Segment >
+            <Accordion>
               <Accordion.Title
                 active={activeIndex === 0}
                 index={0}

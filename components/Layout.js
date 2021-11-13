@@ -5,7 +5,7 @@ import Header from './Header';
 
 export default props => {
   return (
-    <div>
+    <div style={{backgroundColor: "#eef", height: "100vh", width: "100%"}}>
       <Head>
         <title>FundChain</title>
         <link rel="icon" href="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/krinnxb23kgp75s0jyhp" />
@@ -14,7 +14,6 @@ export default props => {
           rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
         />
-        <link rel="stylesheet" href="./globals.css" />
       </Head>
 
       <Header isLogout={false}/>

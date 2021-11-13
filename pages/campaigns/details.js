@@ -301,7 +301,7 @@ class CampaignDetails extends Component {
             </Button>
           )}
 
-          {isOwner && <br /> && <br /> && (
+          {!isOwner && <br /> && <br /> && (
             <Link route={`/campaigns/${this.props.campaignid}/newrequest`}>
               <a>
                 <Button color='facebook' content="Create Spend Request!" color="facebook" />
@@ -309,13 +309,13 @@ class CampaignDetails extends Component {
             </Link>
           )}
 
-          {isOwner && <br /> && <br /> && (
+          {!isOwner && <br /> && <br /> && (
             <Link route={`/campaigns/${this.props.campaignid}/pendingrequest`}>
                 <Button color='facebook' content="View Pending Spend Requests"/>
             </Link>
           )}
 
-          {isOwner && <br /> && <br /> && (
+          {!isOwner && <br /> && <br /> && (
             <Link route={`/campaigns/${this.props.campaignid}/completedrequest`}>
                 <Button color='facebook' content="View Completed Spend Requests"/>
             </Link>
@@ -327,12 +327,12 @@ class CampaignDetails extends Component {
         {this.state.successMessage && <Message success header="Congratulations!" content={this.state.successMessage} />}
         <Button.Group vertical widths={2}>
           {isProposal && <Button color='facebook' primary floated="right" onClick={this.showProposal} content="Show Proposal" />}
-          {isPending && (
+          {!isPending && (
             <Button color='facebook' negative onClick={this.onReject} disabled={!isPending} loading={this.state.rejectloading}>
               Reject Request
             </Button>
           )}
-          {isPending && (
+          {!isPending && (
             <Button color='facebook' inverted positive onClick={this.onApprove} disabled={!isPending} loading={this.state.approveloading}>
               Approve Request
             </Button>
