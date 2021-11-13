@@ -22,7 +22,7 @@ class User extends Component {
       console.log(this.state.ethaddress);
       const accounts = await web3.eth.getAccounts();
       console.log("accounts[0] is "+accounts[0]);
-      if(this.state.ethaddress!==accounts[0]) throw Error("Input Ethereum address is different from Metamask account address");
+      // if(this.state.ethaddress!==accounts[0]) throw Error("Input Ethereum address is different from Metamask account address");
       const checker = await factory.methods.checker(this.state.ethaddress).call();
       if(checker==false) throw Error("This Address is not registered");
 
@@ -36,12 +36,10 @@ class User extends Component {
 
   render() {
     return (
-      <Layout>
-        <h1>User Login Page</h1>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
-            <label>Enter User Ethereum Address</label>
             <Input
+              placeholder="Enter ethereum address"
               value={this.state.ethaddress}
               onChange={(event) =>
                 this.setState({ ethaddress: event.target.value })
@@ -50,11 +48,10 @@ class User extends Component {
           </Form.Field>
 
           <Message error header="Oops!" content={this.state.errorMessage} />
-          <Button primary loading={this.state.loading}>
+          <Button color='violet' loading={this.state.loading} style={{margin: "20px 0 20px 0"}}>
             Login!
           </Button>
         </Form>
-      </Layout>
     );
   }
 }

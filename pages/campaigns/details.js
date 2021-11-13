@@ -241,9 +241,6 @@ class CampaignDetails extends Component {
     return (
       <Layout>
         <h3>Campaign Details</h3>
-
-        {isProposal && <Button primary floated="right" onClick={this.showProposal} content="Show Proposal" />}
-
         <Grid>
           <Grid.Row>
             <Grid.Column>{this.renderCards()}</Grid.Column>
@@ -263,26 +260,12 @@ class CampaignDetails extends Component {
             <Grid.Column>
               <Link route={`/campaigns/${this.props.address}/requests`}>
                 <a>
-                  <Button primary>View Requests</Button>
+                  <Button color='facebook' primary>View Requests</Button>
                 </a>
               </Link>
             </Grid.Column>
           </Grid.Row> */}
         </Grid>
-
-        <br />
-
-        {isPending && <br /> && <br /> && (
-          <Button negative onClick={this.onReject} disabled={!isPending} loading={this.state.rejectloading}>
-            Reject Request
-          </Button>
-        )}
-
-        {isPending && <br /> && <br /> && (
-          <Button positive onClick={this.onApprove} disabled={!isPending} loading={this.state.approveloading}>
-            Approve Request
-          </Button>
-        )}
 
         {isPending && <br /> && (
           <Input
@@ -302,8 +285,7 @@ class CampaignDetails extends Component {
             onChange={(event) => this.setState({ type: event.target.value })}
           />
         )}
-
-        {canContribute && <br /> && (
+        {canContribute && (
           <Input
             placeholder="Enter Amount to contribute to this campaign"
             label="ether"
@@ -311,40 +293,51 @@ class CampaignDetails extends Component {
             onChange={(event) => this.setState({ contributevalue: event.target.value })}
           />
         )}
+          {canContribute && (
+            <Button color="violet" onClick={this.contribute} loading={this.state.contributeloading}>
+              Contribute!
+            </Button>
+          )}
+          <br />
+          <br />
+        <Button.Group vertical style={{}}>
+          {isOwner && (
+            <Link route={`/campaigns/${this.props.campaignid}/newrequest`}>
+              <a>
+                <Button content="Create Spend Request!" color="facebook" />
+              </a>
+            </Link>
+          )}
 
-        {canContribute && (
-          <Button color="violet" onClick={this.contribute} loading={this.state.contributeloading}>
-            Contribute!
-          </Button>
-        )}
+          {isOwner &&  (
+            <Link route={`/campaigns/${this.props.campaignid}/pendingrequest`}>
+                <Button content="View Pending Spend Requests"/>
+            </Link>
+          )}
 
-        {isOwner && <br /> && <br /> && (
-          <Link route={`/campaigns/${this.props.campaignid}/newrequest`}>
-            <a>
-              <Button content="Create Spend Request!" color="facebook" />
-            </a>
-          </Link>
-        )}
-
-        {isOwner && <br /> && <br /> && (
-          <Link route={`/campaigns/${this.props.campaignid}/pendingrequest`}>
-            <a>
-              <Button content="View Pending Spend Requests" color="teal" />
-            </a>
-          </Link>
-        )}
-
-        {isOwner && <br /> && <br /> && (
-          <Link route={`/campaigns/${this.props.campaignid}/completedrequest`}>
-            <a>
-              <Button content="View Completed Spend Requests" color="teal" />
-            </a>
-          </Link>
-        )}
+          {isOwner &&  (
+            <Link route={`/campaigns/${this.props.campaignid}/completedrequest`}>
+                <Button color='facebook' content="View Completed Spend Requests"/>
+            </Link>
+          )}
+        </Button.Group >
 
         {this.state.errorMessage && <Message error header="Oops!" content={this.state.errorMessage} />}
 
         {this.state.successMessage && <Message success header="Congratulations!" content={this.state.successMessage} />}
+        <Button.Group vertical widths={2}>
+          {isProposal && <Button color='facebook' primary floated="right" onClick={this.showProposal} content="Show Proposal" />}
+          {isPending && (
+            <Button color='facebook' negative onClick={this.onReject} disabled={!isPending} loading={this.state.rejectloading}>
+              Reject Request
+            </Button>
+          )}
+          {isPending && (
+            <Button color='facebook' inverted positive onClick={this.onApprove} disabled={!isPending} loading={this.state.approveloading}>
+              Approve Request
+            </Button>
+          )}
+        </Button.Group>
       </Layout>
     );
   }

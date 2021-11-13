@@ -58,8 +58,6 @@ class Approver extends Component {
 
   render() {
     return (
-      <Layout>
-        <h1>Approver Registration Page</h1>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
             <label>Enter Approver First Name</label>
@@ -117,7 +115,6 @@ class Approver extends Component {
             Register!
           </Button>
         </Form>
-      </Layout>
     );
   }
 }

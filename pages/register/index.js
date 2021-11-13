@@ -1,29 +1,47 @@
 import React, { Component } from "react";
+import { Container, Header } from "semantic-ui-react";
 import { Card, Button } from "semantic-ui-react";
 import Layout from "../../components/Layout";
 import { Link } from "../../routes";
+import UserRegistration from './user';
+import ApproverRegsitration from "./approver";
 
-class Register extends Component {
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isUser: true,
+      isApprover: false,
+    }
+
+    this.setUser = this.setUser.bind(this);
+    this.setApprover = this.setApprover.bind(this);
+  }
+
+  setUser() {
+    this.setState({ isUser: true, isApprover: false });
+  }
+
+  setApprover() {
+    this.setState({ isUser: false, isApprover: true });
+  }
   render() {
     return (
       <Layout>
-        <h1>Register Here!</h1>
-        <Link route="/register/user">
-          <a>
-            <Button content="Register User" icon="add circle" primary />
-          </a>
-        </Link>
-        <br></br>
-        <br></br>
-        <Link route="/register/approver">
-          <a>
-            <Button content="Register Approver" icon="add circle" primary />
-          </a>
-        </Link>
+        <Container>
+            <Header size="medium">Register As {this.state.isApprover ? "Approver" : "User"}</Header>
+            <Button.Group style={{margin: "0 0 20px 0"}}>
+              <Button secondary positive={this.state.isUser} onClick={this.setUser}>User</Button>
+              <Button.Or />
+              <Button secondary positive={this.state.isApprover} onClick={this.setApprover}>Approver</Button>
+            </Button.Group>
+            {this.state.isApprover && <ApproverRegsitration />}
+            {this.state.isUser && <UserRegistration />}
+        </Container>        
         
       </Layout>
     );
   }
 }
 
-export default Register;
+export default Login;
