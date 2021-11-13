@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link } from '../../routes';
-import { Card, Message, Button, Header } from "semantic-ui-react";
+import { Card, Message, Button, Header, Icon, Accordion, Segment } from "semantic-ui-react";
 import Layout from "../../components/layoutlogout";
 import User1 from "../../ethereum/user";
 import factory from "../../ethereum/factory_user";
@@ -17,7 +17,16 @@ class UserDetails extends Component {
     eth: "",
     errorMessage: "",
     currentChoice: 0,
+    activeIndex: 0,
   };
+
+  handleClick = (e, titleProps) => {
+    const { index } = titleProps
+    const { activeIndex } = this.state
+    const newIndex = activeIndex === index ? -1 : index
+
+    this.setState({ activeIndex: newIndex })
+  }
 
   static async getInitialProps(props) {
     //call api
@@ -96,7 +105,7 @@ class UserDetails extends Component {
         style: {
           border: "2px solid white!important",
           overflowWrap: "break-word"
-        } 
+        }
       },
     ];
 
@@ -109,6 +118,8 @@ class UserDetails extends Component {
   }
 
   render() {
+    const { activeIndex } = this.state
+
     const btns = ["Create New Campaign", "My Approved Campaigns", "My Rejected Campaigns", "View Public Campaigns", "My Contributed Campaigns", "View Pending Spend Requests", "View Completed Spend Requests"];
     return (
       <Layout>
@@ -119,54 +130,63 @@ class UserDetails extends Component {
 
           {this.state.errorMessage && <Message error header="Oops!" content={this.state.errorMessage} />}
 
-          <br />
-          <br />
-          <Button.Group>
-            <Link route={`/campaigns/newcampaign`}>
-              <a>
-                <Button color="violet" content="Create New Campaign" primary />
-              </a>
-            </Link>
+          <Segment inverted>
+            <Accordion inverted>
+              <Accordion.Title
+                active={activeIndex === 0}
+                index={0}
+                onClick={this.handleClick}
+              >
+                <Icon name='dropdown' />
+                Campaigns
+              </Accordion.Title>
+              <Accordion.Content active={activeIndex === 0}>
+                <Button.Group>
+                  <Link route={`/campaigns/newcampaign`}>
+                    <Button color="violet" content="Create New Campaign" primary />
+                  </Link>
+                  <Button.Or/>
+                  <Link route={`/user/${this.props.add}/approvedcampaigns`}>
+                    <Button color="violet" content="My Approved Campaigns" primary />
+                  </Link>
+                  <Button.Or />
 
-            <Link route={`/user/${this.props.add}/approvedcampaigns`}>
-              <a>
-                <Button color="violet" content="My Approved Campaigns" primary />
-              </a>
-            </Link>
+                  <Link route={`/user/${this.props.add}/rejectedcampaigns`}>
+                    <Button color="violet" content="My Rejected Campaigns" primary />
+                  </Link>
+                  <Button.Or />
 
-            <Link route={`/user/${this.props.add}/rejectedcampaigns`}>
-              <a>
-                <Button color="violet" content="My Rejected Campaigns" primary />
-              </a>
-            </Link>
+                  <Link route={`/campaigns/allcampaign`}>
+                    <Button color="violet" content="View Public Campaigns" primary />
+                  </Link>
+                  <Button.Or />
+                  <Link route={`/user/${this.props.add}/contributedcampaigns`}>
+                    <Button color="violet" content="My Contributed Campaigns" primary />
+                  </Link>
+                </Button.Group>
+              </Accordion.Content>
 
-            <Link route={`/campaigns/allcampaign`}>
-              <a>
-                <Button color="violet" content="View Public Campaigns" primary />
-              </a>
-            </Link>
-          </Button.Group>
-          <Button.Group style={{margin: "20px 0 0 0"}}>
-
-          <Link route={`/user/${this.props.add}/contributedcampaigns`}>
-              <a>
-                <Button color="violet" content="My Contributed Campaigns" primary />
-              </a>
-            </Link>
-
-            <Link route={`/user/${this.props.add}/pendingrequest`}>
-              <a>
-                <Button color="violet" content="View Pending Spend Requests" primary />
-              </a>
-            </Link>
-
-            <Link route={`/user/${this.props.add}/completedrequest`}>
-              <a>
-                <Button color="violet" content="View Completed Spend Requests" primary />
-              </a>
-            </Link>
-          </Button.Group>
-
+              <Accordion.Title
+                active={activeIndex === 1}
+                index={1}
+                onClick={this.handleClick}
+              >
+                <Icon name='dropdown' />
+                Requests
+              </Accordion.Title>
+              <Accordion.Content active={activeIndex === 1}>
+                <Button.Group style={{ margin: "20px 0 0 0" }}>
+                  <Link route={`/user/${this.props.add}/pendingrequest`}>
+                    <Button color="violet" content="View Pending Spend Requests" primary />
+                  </Link>
+                  <Button.Or />
+                  <Link route={`/user/${this.props.add}/completedrequest`}>
+                    <Button color="violet" content="View Completed Spend Requests" primary />
+                  </Link>
+                </Button.Group>
+              </Accordion.Content>
+            </Accordion>
+          </Segment>
         </div>
       </Layout>
     );
