@@ -17,7 +17,7 @@ class ApproverDetails extends Component {
   };
 
   static async getInitialProps(props) {
-    //call api
+    //call api 
     const add = props.query.address;
     return { add };
   }
@@ -48,6 +48,14 @@ class ApproverDetails extends Component {
     //replace data here
     const items = [
       {
+        header: "Address",
+        description: this.props.add,
+        style: {
+          border: "2px solid white!important",
+          overflowWrap: "break-word"
+        }
+      },
+      {
         header: "First Name",
         description: this.state.fname,
       },
@@ -76,7 +84,7 @@ class ApproverDetails extends Component {
     return (
       <Layout>
         <div>
-          <h3>Approver Details for address {this.props.add}</h3>
+          <h3>Approver Details</h3>
 
           {this.renderCampaigns()}
 

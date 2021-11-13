@@ -4,9 +4,7 @@ import { Card, Message, Button, Header, Icon, Accordion, Segment } from "semanti
 import Layout from "../../components/layoutlogout";
 import User1 from "../../ethereum/user";
 import factory from "../../ethereum/factory_user";
-import NewCampaign from "../campaigns/newcampaign";
-import ApprovedCampaigns from './approvedcampaigns';
-import RejectedCampaigns from './rejectedcampaigns';
+
 class UserDetails extends Component {
   state = {
     fname: "",
@@ -111,16 +109,11 @@ class UserDetails extends Component {
 
     return <Card.Group style={{}} items={items} />;
   }
-  getCampaignType(index) {
-    const typeComponent = [<NewCampaign />, <ApprovedCampaigns />, <RejectedCampaigns />];
 
-    return typeComponent[index]
-  }
 
   render() {
     const { activeIndex } = this.state
 
-    const btns = ["Create New Campaign", "My Approved Campaigns", "My Rejected Campaigns", "View Public Campaigns", "My Contributed Campaigns", "View Pending Spend Requests", "View Completed Spend Requests"];
     return (
       <Layout>
         <div>
