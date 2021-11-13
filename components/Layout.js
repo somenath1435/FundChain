@@ -1,23 +1,27 @@
-import React from 'react';
-import { Container } from 'semantic-ui-react';
-import Head from 'next/head';
-import Header from './Header';
+import React from "react";
+import { Container } from "semantic-ui-react";
+import Head from "next/head";
+import Header from "./Header";
 
-export default props => {
+const styles = {
+  paperContainer: {
+    height: 900,
+    width: 1600,
+    backgroundPosition: "center",
+    // backgroundImage: `url(${"http://localhost:3000/static/src/img/p2.jpg"})`,
+    backgroundImage: `url(${"https://images.unsplash.com/photo-1585314062604-1a357de8b000?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1471&q=80"})`,
+  },
+};
+
+export default (props) => {
   return (
-    <div style={{backgroundColor: "#eef", height: "100vh", width: "100%"}}>
-      <Head>
-        <title>FundChain</title>
-        <link rel="icon" href="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/krinnxb23kgp75s0jyhp" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link
-          rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
-        />
-      </Head>
+    <div style={styles.paperContainer}>
+      <Container>
+        <Head>
+          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
+        </Head>
 
-      <Header isLogout={false}/>
-      <Container text style={{ paddingTop: '7em'}}>
+        <Header />
         {props.children}
       </Container>
     </div>
