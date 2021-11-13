@@ -60,7 +60,7 @@ class Approver extends Component {
     return (
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
-            <label>Enter Approver First Name</label>
+            <label style={{ color: "#ffffff" }}>Enter Approver First Name</label>
             <Input
               value={this.state.firstname}
               onChange={(event) =>
@@ -69,7 +69,7 @@ class Approver extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label>Enter Approver Last Name</label>
+            <label style={{ color: "#ffffff" }}>Enter Approver Last Name</label>
             <Input
               value={this.state.lastname}
               onChange={(event) =>
@@ -78,14 +78,14 @@ class Approver extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label>Enter Approver Phone Number</label>
+            <label style={{ color: "#ffffff" }}>Enter Approver Phone Number</label>
             <Input
               value={this.state.phone}
               onChange={(event) => this.setState({ phone: event.target.value })}
             />
           </Form.Field>
           <Form.Field>
-            <label>Enter Approver Organisation</label>
+            <label style={{ color: "#ffffff" }}>Enter Approver Organisation</label>
             <Input
               value={this.state.organisation}
               onChange={(event) =>
@@ -94,7 +94,7 @@ class Approver extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label>Enter Approver Ethereum Address</label>
+            <label style={{ color: "#ffffff" }}>Enter Approver Ethereum Address</label>
             <Input
               value={this.state.ethaddress}
               onChange={(event) =>
@@ -103,7 +103,7 @@ class Approver extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label>Enter Approver Email</label>
+            <label style={{ color: "#ffffff" }}>Enter Approver Email</label>
             <Input
               value={this.state.email}
               onChange={(event) => this.setState({ email: event.target.value })}

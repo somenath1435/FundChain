@@ -84,7 +84,7 @@ class ApproverDetails extends Component {
     return (
       <Layout>
         <div>
-          <h3>Approver Details</h3>
+          <h3 style={{ color: "#ffffff" }}>Approver Details</h3>
 
           {this.renderCampaigns()}
 

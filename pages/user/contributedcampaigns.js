@@ -74,7 +74,7 @@ class ContributedCampaigns extends Component {
     return (
       <Layout>
         <div>
-          <h2>
+          <h2 style={{ color: "#ffffff" }}>
             {this.state.contributed_campaigns_count} contributed campaigns found for user {this.props.address}
           </h2>
 

@@ -73,8 +73,8 @@ class PendingRequest extends Component {
     return (
       <Layout>
         <div>
-          <h1>Pending spend requests will be shown here!</h1>
-          <h3>{this.state.requestcount} Pending Spend Requests found</h3>
+          <h1 style={{ color: "#ffffff" }}>Pending spend requests will be shown here!</h1>
+          <h3 style={{ color: "#ffffff" }}>{this.state.requestcount} Pending Spend Requests found</h3>
 
           {this.displayRequests()}
         </div>

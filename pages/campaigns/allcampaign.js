@@ -63,9 +63,7 @@ class AllCampaigns extends Component {
     return (
       <Layout>
         <div>
-          <h2>
-            {this.state.campaigncount} Public campaigns found
-          </h2>
+          <h2 style={{ color: "#ffffff" }}>{this.state.campaigncount} Public campaigns found</h2>
 
           {this.displayRequests()}
 

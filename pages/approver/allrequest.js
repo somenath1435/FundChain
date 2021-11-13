@@ -76,8 +76,8 @@ class AllRequest extends Component {
     return (
       <Layout>
         <div>
-          <h1>All campaign requests will be shown here!</h1>
-          <h3>
+          <h1 style={{ color: "#ffffff" }}>All campaign requests will be shown here!</h1>
+          <h3 style={{ color: "#ffffff" }}>
             {this.state.requestcount} Campaign Requests found for Approver {this.props.address}
           </h3>
 
