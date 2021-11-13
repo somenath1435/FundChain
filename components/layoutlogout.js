@@ -5,8 +5,8 @@ import Logout from "./logout";
 
 const styles = {
   paperContainer: {
-    height: 900,
-    width: 1600,
+    height: "100vh",
+    width: "100%",
     backgroundPosition: "center",
     // background: "#444",
     // backgroundImage: `url(${"http://localhost:3000/static/src/img/p2.jpg"})`,

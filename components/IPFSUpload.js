@@ -36,7 +36,7 @@ class IPFSUpload extends Component {
         return (
             <Form onSubmit={this.onFormSubmit}>
             <Form.Field>
-              <label>File to be added:</label>
+              <label style={{ color: "#ffffff" }}>File to be added:</label>
               <input type="file" name="file" onChange={this.onChange}/>
             </Form.Field>
             <Button

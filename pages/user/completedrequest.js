@@ -76,8 +76,8 @@ class CompletedRequest extends Component {
     return (
       <Layout>
         <div>
-          <h1>Completed spend requests will be shown here!</h1>
-          <h3>{this.state.requestcount} Completed Spend Requests found</h3>
+          <h1 style={{ color: "#ffffff" }}>Completed spend requests will be shown here!</h1>
+          <h3 style={{ color: "#ffffff" }}>{this.state.requestcount} Completed Spend Requests found</h3>
 
           {this.displayRequests()}
         </div>

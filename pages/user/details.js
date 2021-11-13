@@ -116,7 +116,7 @@ class UserDetails extends Component {
     return (
       <Layout>
         <div>
-          <Header size="large" style={{color : "#fff"}}>User Details</Header>
+          <Header size="large" style={{color : "#ffffff"}}>User Details</Header>
 
           {this.renderCampaigns()}
 

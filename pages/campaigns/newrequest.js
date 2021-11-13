@@ -95,17 +95,19 @@ class RequestNew extends Component {
   render() {
     return (
       <Layout>
-        <h3>Create a Spend Request</h3>
+        <h3 style={{ color: "#ffffff" }}>Create a Spend Request</h3>
 
         <IPFSUpload setLink={this.setLink} />
-        <h4>{this.state.fileLink ? "Status: Upload Successful" : "Status: No files uploaded"}</h4>
+        <h4 style={{ color: "#ffffff" }}>
+          {this.state.fileLink ? "Status: Upload Successful" : "Status: No files uploaded"}
+        </h4>
 
         <br />
         <br />
 
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
-            <label>Spend Amount</label>
+            <label style={{ color: "#ffffff" }}>Spend Amount</label>
             <Input
               label="ether"
               labelPosition="right"
@@ -114,11 +116,11 @@ class RequestNew extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label>Enter Description</label>
+            <label style={{ color: "#ffffff" }}>Enter Description</label>
             <TextArea value={this.state.desc} onChange={(event) => this.setState({ desc: event.target.value })} />
           </Form.Field>
           <Form.Field>
-            <label>Recipient Ethereum Address</label>
+            <label style={{ color: "#ffffff" }}>Recipient Ethereum Address</label>
             <Input
               value={this.state.ethaddress}
               onChange={(event) => this.setState({ ethaddress: event.target.value })}

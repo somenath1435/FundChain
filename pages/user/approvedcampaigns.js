@@ -70,7 +70,7 @@ class ApprovedCampaigns extends Component {
     return (
       <Layout>
         <div>
-          <h2>
+          <h2 style={{ color: "#ffffff" }}>
             {this.state.created_campaigns_count} Approved campaigns found for user {this.props.address}
           </h2>
 

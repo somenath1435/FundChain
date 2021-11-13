@@ -260,7 +260,7 @@ class RequestDetails extends Component {
   render() {
     return (
       <Layout>
-        <h3>Request Details</h3>
+        <h3 style={{ color: "#ffffff" }}>Request Details</h3>
 
         {this.state.proposalhash !== "0x0000000000000000" && (
           <Button primary floated="right" onClick={this.showProposal} content="Show Proposal" />
@@ -272,7 +272,9 @@ class RequestDetails extends Component {
         </Grid>
 
         <br />
-        {this.state.isBacker && !this.state.votegiven && <h3>Do you want to approve this Spend Request?</h3>}
+        {this.state.isBacker && !this.state.votegiven && (
+          <h3 style={{ color: "#ffffff" }}>Do you want to approve this Spend Request?</h3>
+        )}
         <br />
 
         {this.state.isBacker && !this.state.votegiven && (

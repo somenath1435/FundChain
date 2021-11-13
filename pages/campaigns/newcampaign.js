@@ -80,17 +80,17 @@ class CampaignNew extends Component {
   render() {
     return (
       <Layout>
-        <h3>Create a Campaign</h3>
+        <h3 style={{ color: "#ffffff" }}>Create a Campaign</h3>
 
         <IPFSUpload setLink={this.setLink} />
-        <h4>{this.state.fileLink ? "Status: Upload Successful" : "Status: No files uploaded"}</h4>
+        <h4 style={{ color: "#ffffff" }}>{this.state.fileLink ? "Status: Upload Successful" : "Status: No files uploaded"}</h4>
 
         <br />
         <br />
 
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
-            <label>Minimum Contribution</label>
+            <label style={{ color: "#ffffff" }}>Minimum Contribution</label>
             <Input
               label="wei"
               labelPosition="right"
@@ -99,15 +99,15 @@ class CampaignNew extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label>Enter Description</label>
+            <label style={{ color: "#ffffff" }}>Enter Description</label>
             <TextArea value={this.state.desc} onChange={(event) => this.setState({ desc: event.target.value })} />
           </Form.Field>
           <Form.Field>
-            <label>Target City</label>
+            <label style={{ color: "#ffffff" }}>Target City</label>
             <Input value={this.state.city} onChange={(event) => this.setState({ city: event.target.value })} />
           </Form.Field>
           <Form.Field>
-            <label>Ethereum Address</label>
+            <label style={{ color: "#ffffff" }}>Ethereum Address</label>
             <Input
               value={this.state.ethaddress}
               onChange={(event) => this.setState({ ethaddress: event.target.value })}

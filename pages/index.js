@@ -42,33 +42,42 @@ class CampaignIndex extends Component {
   render() {
     return (
       <Layout>
-        <Header style={{
-          textAlign: "center",
-          fontSize: "100px",
-          fontWeight: "bold",
-          letterSpacing: "30px",
-          padding: "100px 0 0 0",
-          color: "#fff"
-        }}>FundChain</Header>
-        <Header style={{
-          textAlign: "center",
-          fontSize: "40px",
-          fontWeight: "bold",
-          letterSpacing: "3px",
-          lineHeight: "10px",
-          padding: "40px 0 40px 0",
-          color: "#fff"
-        }}> Transparent Fundraising Platform</Header>
-        <Segment placeholder style={{padding: "20px"}}>
-          <Grid columns={2} relaxed='very' stackable>
+        <Header
+          style={{
+            textAlign: "center",
+            fontSize: "100px",
+            fontWeight: "bold",
+            letterSpacing: "30px",
+            padding: "100px 0 0 0",
+            color: "#fff",
+          }}
+        >
+          FundChain
+        </Header>
+        <Header
+          style={{
+            textAlign: "center",
+            fontSize: "40px",
+            fontWeight: "bold",
+            letterSpacing: "3px",
+            lineHeight: "10px",
+            padding: "40px 0 40px 0",
+            color: "#fff",
+          }}
+        >
+          {" "}
+          Transparent Fundraising Platform
+        </Header>
+        <Segment placeholder style={{ padding: "20px" }}>
+          <Grid columns={2} relaxed="very" stackable>
             <Grid.Column>
               <Link route="/register">
-                <Button primary content="Register" />
+                <Button color="violet" content="Register" floated="right" />
               </Link>
             </Grid.Column>
-            <Grid.Column verticalAlign='middle'>
+            <Grid.Column verticalAlign="middle">
               <Link route="/login">
-                <Button primary content="Login" />
+                <Button color="violet" content="Login" />
               </Link>
             </Grid.Column>
           </Grid>

@@ -76,8 +76,8 @@ class PendingRequest extends Component {
     return (
       <Layout>
         <div>
-          <h1>Pending campaign requests will be shown here!</h1>
-          <h3>
+          <h1 style={{ color: "#ffffff" }}>Pending campaign requests will be shown here!</h1>
+          <h3 style={{ color: "#ffffff" }}>
             {this.state.requestcount} Pending Campaign Requests found for Approver {this.props.address}
           </h3>
 

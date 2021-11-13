@@ -239,7 +239,7 @@ class CampaignDetails extends Component {
     const isProposal = link !== "0x0000000000000000";
     return (
       <Layout>
-        <h3>Campaign Details</h3>
+        <h3 style={{ color: "#ffffff" }}>Campaign Details</h3>
 
         {isProposal && <Button primary floated="right" onClick={this.showProposal} content="Show Proposal" />}
 
